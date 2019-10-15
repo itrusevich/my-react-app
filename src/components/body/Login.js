@@ -4,7 +4,6 @@ import store from '../../redux/store';
 
 class Login extends Component {
 
-
   logIn() {
     store.dispatch({
       type: 'LOGIN'
