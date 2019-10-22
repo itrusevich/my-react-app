@@ -14,17 +14,29 @@ class Login extends Component {
     };
   }
 
-
-  logIn() {
-    if(this.state.login === 'test' && this.state.password === 'qa') {
+  passwordCheck() {
+    const passMatch = this.props.users.find(el => el.password === this.state.password && el.login === this.state.login);
+    if (!passMatch) {
+      this.setState({
+        error: true,
+        errorText: 'Password is incorrect'
+      })
+    } else {
       store.dispatch({
         type: 'LOGIN'
       })
-    } else {
+    }
+  }
+
+  logIn() {
+    const hasUser = this.props.users.find(el => el.login === this.state.login);
+    if (!hasUser) {
       this.setState({
         error: true,
-        errorText: 'Credentials don\'t match'
+        errorText: 'User doesn\'t exist'
       })
+    } else {
+      this.passwordCheck();
     }
   }
 
@@ -42,7 +54,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.isLoggedIn
+  isLoggedIn: state.isLoggedIn,
+  users: state.users
 
 });
 export default connect(mapStateToProps)(Login);

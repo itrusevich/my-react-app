@@ -2,8 +2,18 @@
 const initialState = {
   page: 'login',
   clicks: 0,
-  isLoggedIn: false
+  isLoggedIn: false,
+  users:[
+    {firstName: 'Iryna',
+    lastName: 'Tru',
+    login: 'itrusevich',
+    password: 'test'},
 
+    {firstName: 'Ivan',
+      lastName: 'Ivanov',
+      login: 'iivanov',
+      password: 'test1'}
+  ]
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +42,11 @@ const reducer = (state = initialState, action) => {
         page: 'login'
       }
 
+    case 'ADD_USER':
+    return {
+      ...state,
+      users: state.users.push(action.user)
+    }
 
     default:
       return state;
