@@ -17,24 +17,26 @@ class Registration extends Component {
       successMessageText: ''
     };
   }
+  addUser(){
+    store.dispatch({
+      type: 'ADD_USER',
+      user: {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        login: this.state.login,
+        password: this.state.password
+      }
+    })
+  }
 
   register() {
     const hasUser = this.props.users.find(el => el.login === this.state.login);
-    if (!hasUser) {
-      store.dispatch({
-        type: 'ADD_USER',
-        user: {
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          login: this.state.login,
-          password: this.state.password
-        }
-      })
+    if (hasUser === undefined) {
+      this.addUser();
       this.setState({
         successMessage: true,
         successMessageText: 'User was created'
       })
-
     } else {
       this.setState({
         error: true,

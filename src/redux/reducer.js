@@ -25,10 +25,11 @@ const reducer = (state = initialState, action) => {
         page: action.payload
       };
     case 'CLICK':
-      return {
-        ...state,
-        clicks: state.clicks+1
-      };
+      state.clicks = state.clicks+1
+      // return {
+      //   ...state,
+      //   clicks: state.clicks+1
+      // };
     case 'LOGIN':
       return {
         ...state,
@@ -43,10 +44,8 @@ const reducer = (state = initialState, action) => {
       }
 
     case 'ADD_USER':
-    return {
-      ...state,
-      users: state.users.push(action.user)
-    }
+      state.users.push(action.user)
+
 
     default:
       return state;

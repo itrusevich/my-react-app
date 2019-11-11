@@ -14,9 +14,8 @@ class Login extends Component {
     };
   }
 
-  passwordCheck() {
-    const passMatch = this.props.users.find(el => el.password === this.state.password && el.login === this.state.login);
-    if (!passMatch) {
+  passwordCheck(obj) {
+    if (this.state.password !== obj.password) {
       this.setState({
         error: true,
         errorText: 'Password is incorrect'
@@ -36,7 +35,7 @@ class Login extends Component {
         errorText: 'User doesn\'t exist'
       })
     } else {
-      this.passwordCheck();
+      this.passwordCheck(hasUser);
     }
   }
 
